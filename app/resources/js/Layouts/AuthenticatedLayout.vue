@@ -32,7 +32,7 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     トップページ
                                 </NavLink>
-                                <NavLink :href="route('user')" :active="route().current('user')">
+                                <NavLink :href="route('user.index')" :active="route().current('user.index')">
                                     ユーザー一覧
                                 </NavLink>
                             </div>

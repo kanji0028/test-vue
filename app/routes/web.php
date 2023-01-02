@@ -36,7 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::resource('/user', UserController::class, ['only' => ['index', 'edit', 'update']]);
+// Route::get('/user', [UserController::class, 'index'])->name('user');
+// Route::get('/user/{id}', [UserController::class, 'edit'])->name('user.edit');
+// Route::get('/user/{id}', [UserController::class, 'edit'])->name('user.edit');
 // Route::get('/user', function () {
 //   return Inertia::render('User')->name('user');
 // });

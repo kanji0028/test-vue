@@ -25,7 +25,7 @@ import Button from '@/Components/Button.vue';
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
-            <Link :href="route('user')" class="bg-red-400 p-3">ユーザー一覧</Link>
+            <Link :href="route('user.index')" class="bg-red-400 p-3">ユーザー一覧</Link>
             <Link :href="route('logout')" method="post" class="bg-red-400 p-3 ml-2">ログアウト</Link>
             <Button class="ml-4">
               これがボタン
