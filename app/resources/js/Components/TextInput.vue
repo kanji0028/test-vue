@@ -17,6 +17,7 @@ defineExpose({ focus: () => input.value.focus() });
 </script>
 
 <template>
+  <!-- emit:親のコンポーネントに打ち上げる -->
     <input
         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
         :value="modelValue"
