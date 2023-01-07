@@ -170,12 +170,8 @@ return [
         'staff_name' => '担当者名',
         'email' => 'メールアドレス',
         'registered_date' => '登録日',
-        'title' => 'タイトル',
-        'published_flag' => '公開設定',
-        'pass_score' => '合格スコア',
-        'test_limit_minutes' => 'テスト時間',
-        'age' => '年代',
-        'thumbnail' => 'イメージ写真',
+        'title' => '件名',
+        'content' => '本文',
     ],
 
 ];
