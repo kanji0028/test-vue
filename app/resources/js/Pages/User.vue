@@ -30,6 +30,7 @@ defineProps({
             <td class="border px-4 py-2">{{ user.name }}</td>
             <td class="border px-4 py-2">{{ user.email }}</td>
             <td class="border px-4 py-2">
+              <!-- 名前付きルート -->
               <Link :href="route('user.edit', user.id)" as="button">詳細</Link>
             </td>  
           </tr>

@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import { useForm } from '@inertiajs/inertia-vue3';
 
-const props = defineProps({
+const props = defineProps({ //変数の受け取り
   user: String,
 })
 let form = useForm({
@@ -41,9 +41,11 @@ let submit = () => {
                         <label for="name" class="mb-3 block text-base font-bold text-[#07074D]">
                           名前
                         </label>
+                        <!-- v-bindは「:」に省略可能 -->
                         <input v-model="form.name" type="text" name="name" id="name" placeholder="名前"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md" v-bind:class="{'border-red-300': form.errors.name}"/>
-                        <div v-show="form.errors.name" class="p-1 m-1 text-sm text-red-400">{{ form.errors.name }}</div>
+                          class="w-full border border-[#e0e0e0] bg-white py-3 px-6 outline-none focus:border-[#6A64F1] focus:shadow-md" 
+                          :class="{'border-red-300': form.errors.name}"/>
+                        <div v-show="form.errors.name" class="text-red-400">{{ form.errors.name }}</div>
                       </div>
                     </div>
                     <div class="w-full px-3 sm:w-1/2">
@@ -52,8 +54,9 @@ let submit = () => {
                           メールアドレス
                         </label>
                         <input v-model="form.email" type="text" name="email" id="email" placeholder="アドレス"
-                          class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 outline-none focus:border-[#6A64F1] focus:shadow-md" v-bind:class="{'border-red-300': form.errors.email}"/>
-                        <div v-show="form.errors.email" class="p-1 m-1 text-sm text-red-400">{{ form.errors.email }}</div>
+                          class="w-full border border-[#e0e0e0] bg-white py-3 px-6 outline-none focus:border-[#6A64F1] focus:shadow-md" 
+                          v-bind:class="{'border-red-300': form.errors.email}"/>
+                        <div v-show="form.errors.email" class="text-red-400">{{ form.errors.email }}</div>
                       </div>
                     </div>
                   </div>
