@@ -160,7 +160,7 @@ return [
         'login_id' => 'ログインID',
         'password' => 'パスワード',
         'password-confirm' => 'パスワード(再入力)',
-        'name' => '名前',
+        'name' => '名',
         'postal_code' => '郵便番号',
         'prefecture' => '都道府県',
         'city' => '市区町村',
@@ -172,6 +172,8 @@ return [
         'registered_date' => '登録日',
         'title' => '件名',
         'content' => '本文',
+        'memo' => 'メモ',
+        'price' => '料金',
     ],
 
 ];

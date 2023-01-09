@@ -47,7 +47,10 @@ class ItemController extends Controller
           'memo' => $request->memo,
         ]);
 
-        return to_route('items.index')->with(['message' => '登録しました']);
+        return to_route('items.index')->with([
+          'message' => '登録しました',
+          'status' => 'success'
+          ]);
     }
 
     /**
