@@ -18,9 +18,10 @@ const form = reactive({
   memo: null,
 })
 
+
+//郵便番号→住所の自動表示
 const fetchAddress = () => {
  new YubinBangoCore(String(form.postcode), (value) => {
-  // console.log(value);
   form.address = value.region + value.locality + value.street
  }) 
 }

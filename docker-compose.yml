@@ -11,7 +11,7 @@ services:
       - ./app:/var/www/app
     working_dir: /var/www/app
   db:
-    platform: linux/x86_64
+    # platform: linux/x86_64
     image: mysql:8.0
     ports:
       - 3307:3306
@@ -20,5 +20,3 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: rootpw
-
-      
