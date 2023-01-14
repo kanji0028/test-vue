@@ -16,9 +16,3 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-
-/config/app.php
-../docker/
-docker-compose.yml
-../docker-compose.yml
-../../docker-compose.yml
