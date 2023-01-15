@@ -28,6 +28,14 @@ const searchCustomers = async () => {
   }
 }
 
+const emit = defineEmits(['update:customerId']) //カスタムイベント名（update:customerId）を書いて 変数emitに入れる
+
+const setCusomer = e => {
+  search.value = e.kana
+  emit('update:customerId', e.id)
+  toggleStatus()
+}
+
 </script>
 
 <template>
@@ -59,7 +67,11 @@ const searchCustomers = async () => {
               </thead>
               <tbody>
                 <tr v-for="customer in customers.value.data" :key="customer.id">
-                  <td class="px-4 py-3">{{ customer.id }}</td>
+                  <td class="px-4 py-3">
+                    <button @click="setCusomer({ id:customer.id, kana:customer.kana })" type="button" class="text-blue-400">
+                      {{ customer.id }}
+                    </button>
+                  </td>
                   <td class="px-4 py-3">{{ customer.name }}</td>
                   <td class="px-4 py-3">{{ customer.kana }}</td>
                   <td class="px-4 py-3">{{ customer.tel }}</td>
