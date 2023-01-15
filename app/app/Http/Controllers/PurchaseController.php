@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePurchaseRequest;
 use App\Http\Requests\UpdatePurchaseRequest;
 use App\Models\Purchase;
+use Inertia\Inertia;
+use App\Models\Item;
+use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -25,7 +29,13 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $customers = Customer::select('id', 'name', 'kana')->get();
+        $items = Item::select('id', 'name', 'price')->where('is_selling', true)->get();
+
+        return Inertia::render('Purchases/Create', [
+          'customers' => $customers,
+          'items' => $items
+        ]);
     }
 
     /**
@@ -36,7 +46,29 @@ class PurchaseController extends Controller
      */
     public function store(StorePurchaseRequest $request)
     {
-        //
+      // dd($request);
+
+      DB::beginTransaction();
+
+      try{
+        $purchase = Purchase::create([
+          'customer_id' => $request->customer_id,
+          'status' => $request->status
+        ]);
+  
+        foreach($request->items as $item) {
+          $purchase->items()->attach($purchase->id, [
+            'item_id' => $item['id'],
+            'quantity' => $item['quantity']
+          ]);
+        }
+        DB::commit(); //実行する  
+        return to_route('dashboard');
+  
+      } catch(\Exception $e) {
+        DB::rollBack();
+      }
+
     }
 
     /**
