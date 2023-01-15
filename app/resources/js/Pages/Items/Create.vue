@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
+import { getToday } from "@/common";
 
 const form = reactive({
   name: null,
