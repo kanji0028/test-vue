@@ -17,6 +17,14 @@ class ItemController extends Controller
     public function index()
     {
       $items = Item::select('id','name','price','is_selling')->get();
+      // $items = Item::pluck('name', 'price')
+      // ->toArray();
+
+      // $arr = ['カットは男性限定', '白髪染もあります', '男女OK'];
+      // foreach ($items as $key => $item) {
+      //   $items[$key]["memo"] = $arr[$key];
+      // }
+      // dd($items);
 
       return Inertia::render('Items/Index', [
         'items' => $items

@@ -20,6 +20,7 @@ const submitFunction = () => {
 
 <!-- HTMLを記述する vueのディレクティブが使える -->
 <template>
+
   <form @submit.prevent="submitFunction">
     <!-- 双方向バインディング -->
     <input type="text" name="title" v-model="form.title"><br>

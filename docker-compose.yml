@@ -20,3 +20,11 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: rootpw
+
+    # 追加
+    volumes:
+      - db-volume:/var/lib/mysql
+
+# 追加
+volumes:
+  db-volume:

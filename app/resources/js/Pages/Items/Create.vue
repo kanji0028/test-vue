@@ -16,6 +16,10 @@ const storeItem = () => {
   Inertia.post('/items', form)
 }
 
+defineProps({
+  errors: Object
+})
+
 </script>
 
 <template>
@@ -31,7 +35,7 @@ const storeItem = () => {
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
-            <BreezeValidationErrors class="mb-4" />
+            <!-- <BreezeValidationErrors class="mb-4" /> -->
             <section class="text-gray-600 body-font relative">
               <form @submit.prevent="storeItem">
                 <div class="container px-5 py-8 mx-auto">
@@ -42,7 +46,10 @@ const storeItem = () => {
                         <div class="relative">
                           <label for="name" class="leading-7 text-sm text-gray-600">商品名</label>
                           <input type="text" id="name" name="name" v-model="form.name"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            v-bind:class="errors.name ? 'border-red-400' : ''"
+                            >
+                          <div v-if="errors.name" class="text-red-400 mt-1">{{ errors.name }}</div>
                         </div>
                       </div>
 
@@ -50,7 +57,10 @@ const storeItem = () => {
                         <div class="relative">
                           <label for="price" class="leading-7 text-sm text-gray-600">商品価格</label>
                           <input type="number" id="price" name="price" v-model="form.price"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                            v-bind:class="errors.price ? 'border-red-400' : ''"
+                            >
+                          <div v-if="errors.price" class="text-red-400">{{ errors.price }}</div>
                         </div>
                       </div>
 
@@ -58,7 +68,10 @@ const storeItem = () => {
                         <div class="relative">
                           <label for="memo" class="leading-7 text-sm text-gray-600">メモ</label>
                           <textarea id="memo" name="memo" v-model="form.memo"
-                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+                            class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                            v-bind:class="errors.memo ? 'border-red-400' : ''">
+                          </textarea>
+                          <div v-if="errors.memo" class="text-red-400">{{ errors.memo }}</div>
                         </div>
                       </div>
                       <div class="p-2 w-full">
