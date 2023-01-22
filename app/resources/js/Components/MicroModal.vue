@@ -30,7 +30,7 @@ const searchCustomers = async () => {
 
 const emit = defineEmits(['update:customerId']) //カスタムイベント名（update:customerId）を書いて 変数emitに入れる
 
-const setCusomer = e => {
+const setCusomer = e => { //eがオブジェクト形式の引数になっている（元はbutton内で定義したオブジェクト）
   search.value = e.kana
   emit('update:customerId', e.id)
   toggleStatus()

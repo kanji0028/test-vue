@@ -1,10 +1,17 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
-import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
+import { reactive } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { getToday } from "@/common";
+import { Field, Form, ErrorMessage } from 'vee-validate';
+
+function isRequired(value) {
+  if (value && value.trim()) {
+    return true;
+  }
+  return '必須入力です';
+}
 
 const form = reactive({
   name: null,
@@ -36,6 +43,13 @@ defineProps({
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
           <div class="p-6 text-gray-900">
             <!-- <BreezeValidationErrors class="mb-4" /> -->
+
+            <Form @submit.prevent="storeItem">
+              リアルタイム[途中]
+              <Field name="field" :rules="isRequired" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+              <ErrorMessage name="field" />
+            </Form>
+
             <section class="text-gray-600 body-font relative">
               <form @submit.prevent="storeItem">
                 <div class="container px-5 py-8 mx-auto">
