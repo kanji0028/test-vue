@@ -20,16 +20,21 @@ class AnalysisController extends Controller
       ->selectRaw('id, sum(subtotal) as totalPerPurchase,
       DATE_FORMAT(created_at, "%Y%m%d") as date');
 
-      $date = DB::table($subQuery)->groupBy('id')
+      $data = DB::table($subQuery)->groupBy('id')
       ->selectRaw('date, sum(totalPerPurchase) as total')
       ->get();
+
+      $labels = $data->pluck('date');
+      $totals = $data->pluck('total');
 
     }
 
     //Ajax通信なのでJsonで返却する必要がある
     return response()->json([
-      'date' => $date,
-      'type' => $request->type
+      'data' => $data,
+      'type' => $request->type,
+      'labels' => $labels,
+      'totals' => $totals,
     ], Response::HTTP_OK);
   }
 }
