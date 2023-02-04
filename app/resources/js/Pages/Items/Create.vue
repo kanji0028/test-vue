@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 import { reactive } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
@@ -13,19 +13,21 @@ function isRequired(value) {
   return '必須入力です';
 }
 
-const form = reactive({
+const form = useForm({
   name: null,
   price: null,
   memo: null
 })
+// const form = reactive({
+//   name: null,
+//   price: null,
+//   memo: null
+// })
 
-const storeItem = () => {
-  Inertia.post('/items', form)
-}
-
-defineProps({
-  errors: Object
-})
+// const storeItem = () => {
+//   // Inertia.post('/items', form)
+//   form.post('/items')
+// }
 
 </script>
 
@@ -44,14 +46,14 @@ defineProps({
           <div class="p-6 text-gray-900">
             <!-- <BreezeValidationErrors class="mb-4" /> -->
 
-            <Form @submit.prevent="storeItem">
+            <!-- <Form @submit.prevent="storeItem">
               リアルタイム[途中]
               <Field name="field" :rules="isRequired" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
               <ErrorMessage name="field" />
-            </Form>
+            </Form> -->
 
             <section class="text-gray-600 body-font relative">
-              <form @submit.prevent="storeItem">
+              <form @submit.prevent="form.post('/items')">
                 <div class="container px-5 py-8 mx-auto">
                   <div class="lg:w-1/2 md:w-2/3 mx-auto">
                     <div class="flex flex-wrap -m-2">
@@ -61,9 +63,9 @@ defineProps({
                           <label for="name" class="leading-7 text-sm text-gray-600">商品名</label>
                           <input type="text" id="name" name="name" v-model="form.name"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                            v-bind:class="errors.name ? 'border-red-400' : ''"
+                            v-bind:class="form.errors.name ? 'border-red-400' : ''"
                             >
-                          <div v-if="errors.name" class="text-red-400 mt-1">{{ errors.name }}</div>
+                          <div v-if="form.errors.name" class="text-red-400 mt-1">{{ form.errors.name }}</div>
                         </div>
                       </div>
 
@@ -72,9 +74,9 @@ defineProps({
                           <label for="price" class="leading-7 text-sm text-gray-600">商品価格</label>
                           <input type="number" id="price" name="price" v-model="form.price"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                            v-bind:class="errors.price ? 'border-red-400' : ''"
+                            v-bind:class="form.errors.price ? 'border-red-400' : ''"
                             >
-                          <div v-if="errors.price" class="text-red-400">{{ errors.price }}</div>
+                          <div v-if="form.errors.price" class="text-red-400">{{ form.errors.price }}</div>
                         </div>
                       </div>
 
@@ -83,9 +85,9 @@ defineProps({
                           <label for="memo" class="leading-7 text-sm text-gray-600">メモ</label>
                           <textarea id="memo" name="memo" v-model="form.memo"
                             class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-                            v-bind:class="errors.memo ? 'border-red-400' : ''">
+                            v-bind:class="form.errors.memo ? 'border-red-400' : ''">
                           </textarea>
-                          <div v-if="errors.memo" class="text-red-400">{{ errors.memo }}</div>
+                          <div v-if="form.errors.memo" class="text-red-400">{{ form.errors.memo }}</div>
                         </div>
                       </div>
                       <div class="p-2 w-full">
